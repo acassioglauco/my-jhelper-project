@@ -4,8 +4,8 @@ As capturas de tela fornecidas ilustram o resultado esperado quando a configura�
 ## Tela de Resultados dos Testes
 1. Saída do Teste:
 
-* Entrada e Saída: A tela mostra a entrada fornecida para os testes e a saída produzida pelo programa. Isso inclui a entrada fornecida, a saída esperada e a saída real do programa.
-* Comparação de Resultados: A comparação entre a saída esperada e a saída real indica se o programa está produzindo o resultado correto. Se a saída real corresponde à saída esperada, o teste é considerado bem-sucedido.
+* **Entrada e Saída**: A tela mostra a entrada fornecida para os testes e a saída produzida pelo programa. Isso inclui a entrada fornecida, a saída esperada e a saída real do programa.
+* **Comparação de Resultados**: A análise entre a saída esperada e a saída real determina se o programa está produzindo os resultados corretos. Quando a saída real corresponde à saída esperada, o teste é considerado bem-sucedido. Caso contrário, será exibida uma tabela de diferenças (Differences), onde as discrepâncias entre a saída esperada e a saída real são apresentadas lado a lado. As diferenças são destacadas em vermelho para facilitar a identificação dos erros.
 2. Mensagens de Status:
 
 * "Test #": Cada teste é identificado por um número. Isso ajuda a rastrear e identificar quais testes foram executados.
