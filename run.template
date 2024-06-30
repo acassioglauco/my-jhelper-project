@@ -8,6 +8,39 @@
 #include <cctype>
 #include <ctime>
 
+namespace Color {
+        enum Code {
+            FG_CYAN = 36,
+            FG_RED = 31,
+            FG_GREEN = 32,
+            FG_YELLOW = 33,
+            FG_BLUE = 34,
+            FG_ORANGE = 208,
+            FG_DEFAULT = 39,
+            BG_RED = 41,
+            BG_GREEN = 42,
+            BG_BLUE = 44,
+            BG_DEFAULT = 49
+        };
+        class Modifier {
+            Code code;
+            public:
+            Modifier(Code pCode) : code(pCode) {}
+            friend std::ostream&
+            operator<<(std::ostream& os, const Modifier& mod) {
+                return os << "\033[" << mod.code << "m";
+            }
+        };
+}
+
+Color::Modifier cyan(Color::FG_CYAN);
+Color::Modifier red(Color::FG_RED);
+Color::Modifier green(Color::FG_GREEN);
+Color::Modifier yellow(Color::FG_YELLOW);
+Color::Modifier blue(Color::FG_BLUE);
+Color::Modifier orange(Color::FG_ORANGE);
+Color::Modifier def(Color::FG_DEFAULT);
+
 namespace jhelper {
 
     struct Test {
@@ -36,13 +69,13 @@ int main() {
     std::cout << std::fixed;
     double maxTime = 0.0;
     for(const jhelper::Test& test: tests ) {
-        std::cout << "Test #" << ++testID << std::endl;
-        std::cout << "Input: \n" << test.input << std::endl;
+        std::cout << cyan << "Test #" << ++testID << std::endl;
+        std::cout << cyan << "Input: \n" << test.input << std::endl;
         if (test.has_output) {
-            std::cout << "Expected output: \n" << test.output << std::endl;
+            std::cout << cyan << "Expected output: \n" << test.output << std::endl;
         }
         else {
-            std::cout << "Expected output: \n" << "N/A" << std::endl;
+            std::cout << cyan << "Expected output: \n" << "N/A" << std::endl;
         }
         if (test.active) {
             // Salva os buffers originais
@@ -69,11 +102,14 @@ int main() {
             std::cin.rdbuf(cinbuf);
             std::cout.rdbuf(coutbuf);
 
-            std::cout << "Actual output: \n" << out.str() << std::endl;
+            std::cout << cyan << "Actual output: \n" << out.str() << std::endl;
             if (test.has_output) {
                 bool result = jhelper::check(test.output, out.str());
                 allOK = allOK && result;
-                std::cout << "Result: " << (result ? "OK" : "Wrong answer") << std::endl;
+                std::cout << (result ? green : red) << "Result: " << (result ? "OK" : "Wrong answer") << def << std::endl;
+            }
+            else {
+                std::cout << yellow << "Result: " << "N/A" << def << std::endl;
             }
             std::cout << "Time: " << currentTime << std::endl;
         }
@@ -85,10 +121,9 @@ int main() {
 
     }
     if(allOK) {
-        std::cout << "All OK" << std::endl;
-    }
-    else {
-        std::cout << "Some cases failed" << std::endl;
+        std::cout << green << "All OK" << def << std::endl;
+    } else {
+        std::cout << red << "Some cases failed" << def << std::endl;
     }
     std::cout << "Maximal time: " << maxTime << "s." << std::endl;
     return 0;
