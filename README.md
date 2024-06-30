@@ -12,3 +12,7 @@ As capturas de tela fornecidas demonstram como os resultados devem aparecer quan
 > [!IMPORTANT]
 Consulte o arquivo `README.md` na pasta `ScreenCapture` para orientações adicionais e capturas de tela que ilustram como os resultados devem ser exibidos quando a configuração está correta e todos os testes são executados com sucesso.
 
+> [!TIP]
+Baixe a extensão: [Competitive Companion](https://chromewebstore.google.com/detail/competitive-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl)
+> 
+Configure a porta na extensão para **4243**.
