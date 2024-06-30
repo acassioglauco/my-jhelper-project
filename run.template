@@ -123,7 +123,7 @@ int main() {
     if(allOK) {
         std::cout << green << "All OK" << def << std::endl;
     } else {
-        std::cout << red << "Some cases failed" << def << std::endl;
+        std::cout << yellow << "Some cases failed" << def << std::endl;
     }
     std::cout << "Maximal time: " << maxTime << "s." << std::endl;
     return 0;
