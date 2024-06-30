@@ -1,0 +1,5 @@
+/Users/glaucoa.colaco/Downloads/jhelper-example-project-master/cmake-build-debug/CMakeFiles/output.dir
+/Users/glaucoa.colaco/Downloads/jhelper-example-project-master/cmake-build-debug/CMakeFiles/testrunner.dir
+/Users/glaucoa.colaco/Downloads/jhelper-example-project-master/cmake-build-debug/CMakeFiles/test.dir
+/Users/glaucoa.colaco/Downloads/jhelper-example-project-master/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/glaucoa.colaco/Downloads/jhelper-example-project-master/cmake-build-debug/CMakeFiles/rebuild_cache.dir
