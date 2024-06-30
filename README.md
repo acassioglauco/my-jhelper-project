@@ -1,7 +1,9 @@
 Exemplo de projeto para o [JHelper](https://github.com/AlexeyDmitriev/jhelper/)
 
 # Sobre
-Este projeto utiliza JHelper para automatizar a execução e verificação de testes. As configurações personalizadas incluem:
+Este projeto é uma modificação do exemplo disponível em [jhelper-example-project](https://github.com/AlexeyDmitriev/jhelper/) criado por Alexey Dmitriev. Fiz ajustes para utilizar   `std::cin` e `std::cout` da STL na classe principal, substituindo o uso de `ostream` e `istream`. Adicionei uma função para comparar saídas e colorir o terminal conforme os resultados. Caso queira ver exemplos visuais, confira a pasta `ScreenCapture`.
+
+Ele utiliza JHelper para automatizar a execução e verificação de testes. As configurações personalizadas incluem:
 
 * **Configuração de Entrada/Saída**: Utilizamos `std::cin` e `std::cout` para entrada e saída padrão.
 * **Tipos de Testes**: Configurados para suportar testes com número de casos conhecido e desconhecido.
