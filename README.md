@@ -18,3 +18,6 @@ Consulte o arquivo `README.md` na pasta `ScreenCapture` para orientações adici
 Baixe a extensão: [Competitive Companion](https://chromewebstore.google.com/detail/competitive-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl)
 > 
 Configure a porta na extensão para **4243**.
+
+# Ambiente de Desenvolvimento
+Estou utilizando o CLion 2024.1.4 Build #CL-241.18034.45, construído em 18 de junho de 2024, no macOS Monterey versão 12.7.4.
