@@ -63,37 +63,29 @@ namespace jhelper {
         return trimmedExpected == trimmedActual;
     }
 
-    // Função para imprimir as diferenças de forma alinhada
     void printDifference(const std::string& expected, const std::string& actual) {
         std::istringstream expectedStream(expected);
         std::istringstream actualStream(actual);
         std::string expectedLine, actualLine;
 
-        // Define a largura fixa para as colunas
         const int width = 15;
 
-        // Armazena as linhas das saídas esperadas e atuais
         std::vector<std::string> expectedLines;
         std::vector<std::string> actualLines;
 
-        // Lê as linhas das saídas esperadas
         while (std::getline(expectedStream, expectedLine)) {
             expectedLines.push_back(expectedLine);
         }
 
-        // Lê as linhas das saídas atuais
         while (std::getline(actualStream, actualLine)) {
             actualLines.push_back(actualLine);
         }
 
-        // Define o número máximo de linhas
         size_t maxLines = std::max(expectedLines.size(), actualLines.size());
 
-        // Imprime o cabeçalho
         std::cout << std::left << std::setw(width) << "Expected" << " | " << "Actual" << std::endl;
         std::cout << std::string(width + 10, '-') << std::endl;
 
-        // Imprime as linhas
         for (size_t i = 0; i < maxLines; ++i) {
             std::string expLine = (i < expectedLines.size()) ? expectedLines[i] : "";
             std::string actLine = (i < actualLines.size()) ? actualLines[i] : "";
@@ -121,10 +113,7 @@ namespace jhelper {
 
 } // namespace jhelper
 
-int main() {
-    std::vector<jhelper::Test> tests = {
-            %Tests%
-    };
+void runTests(std::vector<jhelper::Test>& tests) {
     bool allOK = true;
     int testID = 0;
     std::cout << std::fixed;
@@ -140,15 +129,12 @@ int main() {
         }
 
         if (test.active) {
-            // Salva os buffers originais
             std::streambuf* cinbuf = std::cin.rdbuf();
             std::streambuf* coutbuf = std::cout.rdbuf();
 
-            // Cria os fluxos para redirecionamento
-            std::istringstream in(test.input); // Entrada a partir de test.input
-            std::ostringstream out; // Saída capturada
+            std::istringstream in(test.input);
+            std::ostringstream out;
 
-            // Redireciona std::cin e std::cout
             std::cin.rdbuf(in.rdbuf());
             std::cout.rdbuf(out.rdbuf());
 
@@ -160,7 +146,6 @@ int main() {
             double currentTime = double(finish - start) / CLOCKS_PER_SEC;
             maxTime = std::max(currentTime, maxTime);
 
-            // Restaura os buffers originais
             std::cin.rdbuf(cinbuf);
             std::cout.rdbuf(coutbuf);
 
@@ -192,7 +177,61 @@ int main() {
     }
 
     std::cout << "Maximal time: " << maxTime << "s." << std::endl;
+}
+
+int main() {
+    std::vector<jhelper::Test> tests = {
+            %Tests%
+    };
+
+    // Primeira rodada de testes
+    runTests(tests);
+
+    char continueTesting;
+    do {
+        jhelper::Test newTest;
+
+        std::cout << "Enter the input for the test case (type 'end' on a single line to finish):\n";
+        std::string testInput;
+        std::string line;
+        while (std::getline(std::cin, line) && line != "end") {
+            testInput += line + "\n";
+        }
+
+        // Remove the last newline, if present
+        if (!testInput.empty() && testInput.back() == '\n') {
+            testInput.pop_back();
+        }
+        newTest.input = testInput;
+
+        std::cout << "Enter the expected output (type 'end' on a single line to finish):\n";
+        std::string expectedOutput;
+        while (std::getline(std::cin, line) && line != "end") {
+            expectedOutput += line + "\n";
+        }
+
+        // Remove the last newline, if present
+        if (!expectedOutput.empty() && expectedOutput.back() == '\n') {
+            expectedOutput.pop_back();
+        }
+        newTest.output = expectedOutput;
+
+        newTest.active = true;
+        newTest.has_output = true;
+        tests.push_back(newTest);
+
+        std::cout << "\n--- Re-executing all tests. ---\n" << std::endl;
+        runTests(tests);
+
+        std::cout << "Would you like to add another test case? (y/n):";
+        std::cin >> continueTesting;
+        std::cin.ignore(); // Clears the input buffer
+
+    } while (continueTesting == 'y' || continueTesting == 'Y');
+
     return 0;
 }
+
+
 
 
